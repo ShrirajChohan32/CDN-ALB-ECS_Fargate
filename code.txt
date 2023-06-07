@@ -1,0 +1,1 @@
+<aws_cdk.CfnOutput object at 0x1135ecd50>

@@ -1,0 +1,20 @@
+{
+  "version": "15.0.0",
+  "files": {
+    "b7be5d735eb1ecc1e59136e2a8a144ad33d105df4183a58464c3cea06ddeba6b": {
+      "source": {
+        "path": "CloudfrontStack.template.json",
+        "packaging": "file"
+      },
+      "destinations": {
+        "273541776559-us-east-1": {
+          "bucketName": "cdk-hnb659fds-assets-273541776559-us-east-1",
+          "objectKey": "b7be5d735eb1ecc1e59136e2a8a144ad33d105df4183a58464c3cea06ddeba6b.json",
+          "region": "us-east-1",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::273541776559:role/cdk-hnb659fds-file-publishing-role-273541776559-us-east-1"
+        }
+      }
+    }
+  },
+  "dockerImages": {}
+}

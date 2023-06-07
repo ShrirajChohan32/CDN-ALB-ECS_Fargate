@@ -1,0 +1,137 @@
+{
+  "Resources": {
+    "LB8A12904C": {
+      "Type": "AWS::ElasticLoadBalancingV2::LoadBalancer",
+      "Properties": {
+        "LoadBalancerAttributes": [
+          {
+            "Key": "deletion_protection.enabled",
+            "Value": "false"
+          }
+        ],
+        "Scheme": "internet-facing",
+        "SecurityGroups": [
+          {
+            "Fn::GetAtt": [
+              "LBSecurityGroup8A41EA2B",
+              "GroupId"
+            ]
+          }
+        ],
+        "Subnets": [
+          "subnet-09b971b6ad155ccbe",
+          "subnet-04fcfbd7ece3b5375",
+          "subnet-054886c8aceda1706"
+        ],
+        "Type": "application"
+      },
+      "Metadata": {
+        "aws:cdk:path": "ResourceStack/LB/Resource"
+      }
+    },
+    "LBSecurityGroup8A41EA2B": {
+      "Type": "AWS::EC2::SecurityGroup",
+      "Properties": {
+        "GroupDescription": "Automatically created Security Group for ELB ResourceStackLB17285491",
+        "SecurityGroupEgress": [
+          {
+            "CidrIp": "255.255.255.255/32",
+            "Description": "Disallow all traffic",
+            "FromPort": 252,
+            "IpProtocol": "icmp",
+            "ToPort": 86
+          }
+        ],
+        "VpcId": "vpc-08e1e0b3cf9b6c4cd"
+      },
+      "Metadata": {
+        "aws:cdk:path": "ResourceStack/LB/SecurityGroup/Resource"
+      }
+    },
+    "myDist9DB766F3": {
+      "Type": "AWS::CloudFront::Distribution",
+      "Properties": {
+        "DistributionConfig": {
+          "DefaultCacheBehavior": {
+            "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
+            "Compress": true,
+            "TargetOriginId": "ResourceStackmyDistOrigin1FED56E10",
+            "ViewerProtocolPolicy": "allow-all"
+          },
+          "Enabled": true,
+          "HttpVersion": "http2",
+          "IPV6Enabled": true,
+          "Origins": [
+            {
+              "CustomOriginConfig": {
+                "OriginProtocolPolicy": "https-only",
+                "OriginSSLProtocols": [
+                  "TLSv1.2"
+                ]
+              },
+              "DomainName": {
+                "Fn::GetAtt": [
+                  "LB8A12904C",
+                  "DNSName"
+                ]
+              },
+              "Id": "ResourceStackmyDistOrigin1FED56E10",
+              "OriginCustomHeaders": [
+                {
+                  "HeaderName": "Foo",
+                  "HeaderValue": "bar"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "ResourceStack/myDist/Resource"
+      }
+    },
+    "CDKMetadata": {
+      "Type": "AWS::CDK::Metadata",
+      "Properties": {
+        "Analytics": "v2:deflate64:H4sIAAAAAAAA/1WOywrCMBBFv6X7dLQtuPcBblxI+wGSpqmOjUlJJkoJ+XdTRbCr4d5zuEwJG1hn/OVy0Q25whZCQ1wMrJbOeCskS+wSpOKOUCjDu5YrrgXq67OEsB1HhYITGn1KbPdh0rJ9v8iRSZHsRgpvkaajNX6cnUURWdr3XW+NJggHdGSx9fP0rP7nGOfm92Fk54luRq8qKAqosrtDzK3XhA8J9fe+AeWvaS7nAAAA"
+      },
+      "Metadata": {
+        "aws:cdk:path": "ResourceStack/CDKMetadata/Default"
+      }
+    }
+  },
+  "Parameters": {
+    "BootstrapVersion": {
+      "Type": "AWS::SSM::Parameter::Value<String>",
+      "Default": "/cdk-bootstrap/hnb659fds/version",
+      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+    }
+  },
+  "Rules": {
+    "CheckBootstrapVersion": {
+      "Assertions": [
+        {
+          "Assert": {
+            "Fn::Not": [
+              {
+                "Fn::Contains": [
+                  [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5"
+                  ],
+                  {
+                    "Ref": "BootstrapVersion"
+                  }
+                ]
+              }
+            ]
+          },
+          "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+        }
+      ]
+    }
+  }
+}

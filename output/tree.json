@@ -1,0 +1,396 @@
+{
+  "version": "tree-0.1",
+  "tree": {
+    "id": "App",
+    "path": "",
+    "children": {
+      "Tree": {
+        "id": "Tree",
+        "path": "Tree",
+        "constructInfo": {
+          "fqn": "constructs.Construct",
+          "version": "10.0.0"
+        }
+      },
+      "CloudfrontStack": {
+        "id": "CloudfrontStack",
+        "path": "CloudfrontStack",
+        "children": {
+          "MyWebACL": {
+            "id": "MyWebACL",
+            "path": "CloudfrontStack/MyWebACL",
+            "attributes": {
+              "aws:cdk:cloudformation:type": "AWS::WAFv2::WebACL",
+              "aws:cdk:cloudformation:props": {
+                "defaultAction": {
+                  "block": {}
+                },
+                "scope": "CLOUDFRONT",
+                "visibilityConfig": {
+                  "cloudWatchMetricsEnabled": true,
+                  "metricName": "MyWebACL",
+                  "sampledRequestsEnabled": true
+                },
+                "name": "DDOSACL",
+                "rules": [
+                  {
+                    "name": "Custom-RateLimit500",
+                    "priority": 0,
+                    "statement": {
+                      "rateBasedStatement": {
+                        "aggregateKeyType": "IP",
+                        "limit": 500
+                      }
+                    },
+                    "visibilityConfig": {
+                      "cloudWatchMetricsEnabled": true,
+                      "metricName": "Custom-RateLimit500",
+                      "sampledRequestsEnabled": true
+                    },
+                    "action": {
+                      "block": {}
+                    }
+                  },
+                  {
+                    "name": "AWS-AWSManagedRulesBotControlRuleSet",
+                    "priority": 1,
+                    "statement": {
+                      "managedRuleGroupStatement": {
+                        "name": "AWSManagedRulesBotControlRuleSet",
+                        "vendorName": "AWS"
+                      }
+                    },
+                    "visibilityConfig": {
+                      "cloudWatchMetricsEnabled": true,
+                      "metricName": "AWS-AWSManagedRulesBotControlRuleSet",
+                      "sampledRequestsEnabled": true
+                    },
+                    "overrideAction": {
+                      "none": {}
+                    }
+                  },
+                  {
+                    "name": "AWS-AWSManagedRulesAmazonIpReputationList",
+                    "priority": 2,
+                    "statement": {
+                      "managedRuleGroupStatement": {
+                        "name": "AWSManagedRulesAmazonIpReputationList",
+                        "vendorName": "AWS"
+                      }
+                    },
+                    "visibilityConfig": {
+                      "cloudWatchMetricsEnabled": true,
+                      "metricName": "AWS-AWSManagedRulesAmazonIpReputationList",
+                      "sampledRequestsEnabled": true
+                    },
+                    "overrideAction": {
+                      "none": {}
+                    }
+                  },
+                  {
+                    "name": "AWS-AWSManagedRulesCommonRuleSet",
+                    "priority": 3,
+                    "statement": {
+                      "managedRuleGroupStatement": {
+                        "name": "AWSManagedRulesCommonRuleSet",
+                        "vendorName": "AWS"
+                      }
+                    },
+                    "visibilityConfig": {
+                      "cloudWatchMetricsEnabled": true,
+                      "metricName": "AWS-AWSManagedRulesCommonRuleSet",
+                      "sampledRequestsEnabled": true
+                    },
+                    "overrideAction": {
+                      "none": {}
+                    }
+                  },
+                  {
+                    "name": "AWS-AWSManagedRulesKnownBadInputsRuleSet",
+                    "priority": 4,
+                    "statement": {
+                      "managedRuleGroupStatement": {
+                        "name": "AWSManagedRulesKnownBadInputsRuleSet",
+                        "vendorName": "AWS"
+                      }
+                    },
+                    "visibilityConfig": {
+                      "cloudWatchMetricsEnabled": true,
+                      "metricName": "AWS-AWSManagedRulesKnownBadInputsRuleSet",
+                      "sampledRequestsEnabled": true
+                    },
+                    "overrideAction": {
+                      "none": {}
+                    }
+                  },
+                  {
+                    "name": "AWS-AWSManagedRulesSQLiRuleSet",
+                    "priority": 5,
+                    "statement": {
+                      "managedRuleGroupStatement": {
+                        "name": "AWSManagedRulesSQLiRuleSet",
+                        "vendorName": "AWS"
+                      }
+                    },
+                    "visibilityConfig": {
+                      "cloudWatchMetricsEnabled": true,
+                      "metricName": "AWS-AWSManagedRulesSQLiRuleSet",
+                      "sampledRequestsEnabled": true
+                    },
+                    "overrideAction": {
+                      "none": {}
+                    }
+                  }
+                ]
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_wafv2.CfnWebACL",
+              "version": "2.6.0"
+            }
+          },
+          "WafArnOutput": {
+            "id": "WafArnOutput",
+            "path": "CloudfrontStack/WafArnOutput",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnOutput",
+              "version": "2.6.0"
+            }
+          },
+          "CDKMetadata": {
+            "id": "CDKMetadata",
+            "path": "CloudfrontStack/CDKMetadata",
+            "children": {
+              "Default": {
+                "id": "Default",
+                "path": "CloudfrontStack/CDKMetadata/Default",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnResource",
+                  "version": "2.6.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "constructs.Construct",
+              "version": "10.0.0"
+            }
+          }
+        },
+        "constructInfo": {
+          "fqn": "aws-cdk-lib.Stack",
+          "version": "2.6.0"
+        }
+      },
+      "ResourceStack": {
+        "id": "ResourceStack",
+        "path": "ResourceStack",
+        "children": {
+          "vpc": {
+            "id": "vpc",
+            "path": "ResourceStack/vpc",
+            "children": {
+              "PublicSubnet1": {
+                "id": "PublicSubnet1",
+                "path": "ResourceStack/vpc/PublicSubnet1",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.Resource",
+                  "version": "2.6.0"
+                }
+              },
+              "PublicSubnet2": {
+                "id": "PublicSubnet2",
+                "path": "ResourceStack/vpc/PublicSubnet2",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.Resource",
+                  "version": "2.6.0"
+                }
+              },
+              "PublicSubnet3": {
+                "id": "PublicSubnet3",
+                "path": "ResourceStack/vpc/PublicSubnet3",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.Resource",
+                  "version": "2.6.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.Resource",
+              "version": "2.6.0"
+            }
+          },
+          "LB": {
+            "id": "LB",
+            "path": "ResourceStack/LB",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "ResourceStack/LB/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::ElasticLoadBalancingV2::LoadBalancer",
+                  "aws:cdk:cloudformation:props": {
+                    "loadBalancerAttributes": [
+                      {
+                        "key": "deletion_protection.enabled",
+                        "value": "false"
+                      }
+                    ],
+                    "scheme": "internet-facing",
+                    "securityGroups": [
+                      {
+                        "Fn::GetAtt": [
+                          "LBSecurityGroup8A41EA2B",
+                          "GroupId"
+                        ]
+                      }
+                    ],
+                    "subnets": [
+                      "subnet-09b971b6ad155ccbe",
+                      "subnet-04fcfbd7ece3b5375",
+                      "subnet-054886c8aceda1706"
+                    ],
+                    "type": "application"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.CfnLoadBalancer",
+                  "version": "2.6.0"
+                }
+              },
+              "SecurityGroup": {
+                "id": "SecurityGroup",
+                "path": "ResourceStack/LB/SecurityGroup",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "ResourceStack/LB/SecurityGroup/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroup",
+                      "aws:cdk:cloudformation:props": {
+                        "groupDescription": "Automatically created Security Group for ELB ResourceStackLB17285491",
+                        "securityGroupEgress": [
+                          {
+                            "cidrIp": "255.255.255.255/32",
+                            "description": "Disallow all traffic",
+                            "ipProtocol": "icmp",
+                            "fromPort": 252,
+                            "toPort": 86
+                          }
+                        ],
+                        "vpcId": "vpc-08e1e0b3cf9b6c4cd"
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroup",
+                      "version": "2.6.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.SecurityGroup",
+                  "version": "2.6.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.ApplicationLoadBalancer",
+              "version": "2.6.0"
+            }
+          },
+          "myDist": {
+            "id": "myDist",
+            "path": "ResourceStack/myDist",
+            "children": {
+              "Origin1": {
+                "id": "Origin1",
+                "path": "ResourceStack/myDist/Origin1",
+                "constructInfo": {
+                  "fqn": "constructs.Construct",
+                  "version": "10.0.0"
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "ResourceStack/myDist/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::CloudFront::Distribution",
+                  "aws:cdk:cloudformation:props": {
+                    "distributionConfig": {
+                      "enabled": true,
+                      "origins": [
+                        {
+                          "domainName": {
+                            "Fn::GetAtt": [
+                              "LB8A12904C",
+                              "DNSName"
+                            ]
+                          },
+                          "id": "ResourceStackmyDistOrigin1FED56E10",
+                          "originCustomHeaders": [
+                            {
+                              "headerName": "Foo",
+                              "headerValue": "bar"
+                            }
+                          ],
+                          "customOriginConfig": {
+                            "originSslProtocols": [
+                              "TLSv1.2"
+                            ],
+                            "originProtocolPolicy": "https-only"
+                          }
+                        }
+                      ],
+                      "defaultCacheBehavior": {
+                        "pathPattern": "*",
+                        "targetOriginId": "ResourceStackmyDistOrigin1FED56E10",
+                        "cachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
+                        "compress": true,
+                        "viewerProtocolPolicy": "allow-all"
+                      },
+                      "httpVersion": "http2",
+                      "ipv6Enabled": true
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_cloudfront.CfnDistribution",
+                  "version": "2.6.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_cloudfront.Distribution",
+              "version": "2.6.0"
+            }
+          },
+          "CDKMetadata": {
+            "id": "CDKMetadata",
+            "path": "ResourceStack/CDKMetadata",
+            "children": {
+              "Default": {
+                "id": "Default",
+                "path": "ResourceStack/CDKMetadata/Default",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnResource",
+                  "version": "2.6.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "constructs.Construct",
+              "version": "10.0.0"
+            }
+          }
+        },
+        "constructInfo": {
+          "fqn": "aws-cdk-lib.Stack",
+          "version": "2.6.0"
+        }
+      }
+    },
+    "constructInfo": {
+      "fqn": "aws-cdk-lib.App",
+      "version": "2.6.0"
+    }
+  }
+}

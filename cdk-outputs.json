@@ -1,0 +1,7 @@
+{
+  "ResourceStack": {
+    "LoadBalancerArnOutput": "arn:aws:elasticloadbalancing:ap-southeast-2:273541776559:loadbalancer/app/Resou-Servi-ZA8CQEQ536SE/8739ca3278e0b69f",
+    "ServiceServiceURL250C0FB6": "http://Resou-Servi-ZA8CQEQ536SE-374952839.ap-southeast-2.elb.amazonaws.com",
+    "ServiceLoadBalancerDNSEC5B149E": "Resou-Servi-ZA8CQEQ536SE-374952839.ap-southeast-2.elb.amazonaws.com"
+  }
+}

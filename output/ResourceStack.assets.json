@@ -1,0 +1,20 @@
+{
+  "version": "15.0.0",
+  "files": {
+    "4c03ed54d674b8233df92121930f945d67e2919977ba6f9be2f9c8e882ba8719": {
+      "source": {
+        "path": "ResourceStack.template.json",
+        "packaging": "file"
+      },
+      "destinations": {
+        "273541776559-ap-southeast-2": {
+          "bucketName": "cdk-hnb659fds-assets-273541776559-ap-southeast-2",
+          "objectKey": "4c03ed54d674b8233df92121930f945d67e2919977ba6f9be2f9c8e882ba8719.json",
+          "region": "ap-southeast-2",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::273541776559:role/cdk-hnb659fds-file-publishing-role-273541776559-ap-southeast-2"
+        }
+      }
+    }
+  },
+  "dockerImages": {}
+}
