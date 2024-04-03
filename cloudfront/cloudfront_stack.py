@@ -219,8 +219,7 @@ class CloudfrontStack(Stack):
         super().__init__(scope, construct_id, **kwargs)
 
         Us_east_1_web_acl_name = self.web_acl_name = web_acl_name
-
-        # # print(f"Web ACL Name in CloudfrontResourceStack: {Us_east_1_web_acl_name}")
+        # print(Us_east_1_web_acl_name)
 
         # Create a Boto3 client for the Elastic Load Balancing (ELB) service
         elbv2_client = boto3.client('elbv2')
@@ -232,21 +231,22 @@ class CloudfrontStack(Stack):
         # Extract the ALB ARN from the response
         alb_arn = response['LoadBalancers'][0]['LoadBalancerArn']
 
-        # Retrieve all target groups
-        target_group_info = elbv2_client.describe_target_groups()
-        # print(target_group_info)
-
-        # Extract the ARNs of the target groups from the response
-        existing_target_group_arn = [target_group['TargetGroupArn'] for target_group in target_group_info['TargetGroups']]
-
-        # Convert the list into a string
-        target_group_arn_string = ', '.join(existing_target_group_arn)
-        # print(target_group_arn_string)
-
         listener_info = elbv2_client.describe_listeners(LoadBalancerArn=alb_arn)
 
         # Extract the ARNs of the listeners from the response
         existing_listener_arn = [listener['ListenerArn'] for listener in listener_info['Listeners']]
+
+        target_group_arns = []
+        for listener in listener_info['Listeners']:
+            default_actions = listener.get('DefaultActions', [])
+            for action in default_actions:
+                if action.get('TargetGroupArn'):
+                    target_group_arns.append(action['TargetGroupArn'])
+
+        # Convert the list of target group ARNs into a single string
+        target_group_arn_string = ", ".join(target_group_arns)
+        
+        print(target_group_arn_string)
 
         # Convert the list into a string
         existing_listener_arn_string = ', '.join(existing_listener_arn)
@@ -254,7 +254,7 @@ class CloudfrontStack(Stack):
 
         alb = elbv2.ApplicationLoadBalancer.from_lookup( self,"ALB",
             load_balancer_arn=alb_arn)
-
+        
         # Create a listener rule with the fixed response action
         listener_rule = elbv2.CfnListenerRule(
             self,
@@ -303,7 +303,7 @@ class CloudfrontStack(Stack):
             priority=2,
         )
 
-        # The Below SDk gets the default listener rule 
+        # # The Below SDk gets the default listener rule 
 
         # modifyOnBeta = elbv2_client.modify_listener(
         #     ListenerArn=existing_listener_arn_string,
@@ -319,12 +319,7 @@ class CloudfrontStack(Stack):
         #     ]
         # )
 
-        ######This aboce SDK works
-
-
-
-
-
+        # ##### Alternatively use the above SDK works to modify the Default listener rule
 
                 # Create a Boto3 WAFV2 client
         wafv2_client = boto3.client('wafv2',region_name='us-east-1')
@@ -340,9 +335,9 @@ class CloudfrontStack(Stack):
             web_acl_name = web_acl['Name']
             if web_acl_name == Us_east_1_web_acl_name:
                 web_acl_arn = web_acl['ARN']
+            else:
+                print("Web ACL not found")
         # print(web_acl_arn)
-
-   
         
         # Create the CloudFront distribution
         CDN = cloudfront.Distribution(
@@ -357,3 +352,180 @@ class CloudfrontStack(Stack):
                 ),
             ),
         )
+        
+        ##########
+
+        # Us_east_1_web_acl_name = self.web_acl_name = web_acl_name
+
+        # # # print(f"Web ACL Name in CloudfrontResourceStack: {Us_east_1_web_acl_name}")
+
+        # # Create a Boto3 client for the Elastic Load Balancing (ELB) service
+        # elbv2_client = boto3.client('elbv2')
+
+        # # Retrieve the ALB ARN using the load balancer name
+        # load_balancer_name = self.lb_name = lb_name
+        # response = elbv2_client.describe_load_balancers(Names=[load_balancer_name])
+
+        # # print(f"LB ARN", response)
+
+        # # Extract the ALB ARN from the response
+        # alb_arn = response['LoadBalancers'][0]['LoadBalancerArn']
+
+        # # Retrieve all target groups
+        # target_group_info = elbv2_client.describe_target_groups()
+        # # print(target_group_info)
+
+        # # Extract the ARNs of the target groups from the response
+        # existing_target_group_arn = [target_group['TargetGroupArn'] for target_group in target_group_info['TargetGroups']]
+
+        # # Convert the list into a string
+        # target_group_arn_string = ', '.join(existing_target_group_arn)
+        # print(f"TArrget gourps",target_group_arn_string)
+
+        # listener_info = elbv2_client.describe_listeners(LoadBalancerArn=alb_arn)
+
+        # # Extract the ARNs of the listeners from the response
+        # existing_listener_arn = [listener['ListenerArn'] for listener in listener_info['Listeners']]
+
+        # # Convert the list into a string
+        # existing_listener_arn_string = ', '.join(existing_listener_arn)
+        # # print(existing_listener_arn_string)
+
+        # alb = elbv2.ApplicationLoadBalancer.from_lookup( self,"ALB",
+        #     load_balancer_arn=alb_arn)
+
+
+        # # listener_rule = elbv2.ApplicationListenerRule(self, "MyListenerRule",
+        # #     action=elbv2.ListenerAction.forward(
+        # #     target_groups=[target_group_arn_string]),
+        # #     conditions=[elbv2.ListenerCondition.http_header("New", ["Zealand"])],
+        # #     listener_arn=existing_listener_arn_string,
+        # #     listener=alb.add_listener("Listener", port=80),
+        # #     priority=1,
+        
+        # # Create a listener rule with the fixed response action
+        # listener_rule = elbv2.CfnListenerRule(
+        #     self,
+        #     "MyListenerRule",
+        #     actions=[
+        #         elbv2.CfnListenerRule.ActionProperty(
+        #             type="forward",
+        #             target_group_arn=target_group_arn_string
+        #         )
+        #     ],
+        #     conditions=[
+        #         elbv2.CfnListenerRule.RuleConditionProperty(
+        #             field="http-header",
+        #             http_header_config=elbv2.CfnListenerRule.HttpHeaderConfigProperty(
+        #                 http_header_name="New",
+        #                 values=["Zealand"]
+        #             )
+        #         )
+        #     ],
+        #     listener_arn=existing_listener_arn_string,
+        #     priority=1,
+        # ) 
+
+
+        # # listener_rule = elbv2.CfnListenerRule(
+        # #     self,
+        # #     "MyListenerRule",
+        # #     actions=[
+        # #         elbv2.CfnListenerRule.ActionProperty(
+        # #             type="forward",
+        # #             target_group_arn=target_group_arn_string
+        # #         )
+        # #     ],
+        # #     conditions=[
+        # #         elbv2.CfnListenerRule.RuleConditionProperty(
+        # #             field="http-header",
+        # #             http_header_config=elbv2.CfnListenerRule.HttpHeaderConfigProperty(
+        # #                 http_header_name="New",
+        # #                 values=["Zealand"]
+        # #             )
+        # #         )
+        # #     ],
+        # #     listener_arn=existing_listener_arn_string,
+        # #     priority=1,
+
+
+
+        # #         # Create the listener rule with the fixed response
+        # # default_rule = elbv2.CfnListenerRule(
+        # #     self,
+        # #     "FixedResponseRule",
+        # #     actions=[
+        # #         elbv2.CfnListenerRule.ActionProperty(
+        # #             type="fixed-response",
+        # #             fixed_response_config=elbv2.CfnListenerRule.FixedResponseConfigProperty(
+        # #                 status_code="403",
+        # #                 message_body="Forbidden"
+        # #             )
+        # #         )
+        # #     ],
+        # #     conditions=[
+        # #         elbv2.CfnListenerRule.RuleConditionProperty(
+        # #             field="path-pattern",
+        # #             path_pattern_config=elbv2.CfnListenerRule.PathPatternConfigProperty(
+        # #                 values=["/*"]
+        # #             )
+        # #         )
+        # #     ],
+        # #     listener_arn=existing_listener_arn_string,
+        # #     priority=2,
+        # # )
+
+        # # # The Below SDk gets the default listener rule 
+
+        # modifyOnBeta = elbv2_client.modify_listener(
+        #     ListenerArn=existing_listener_arn_string,
+        #     DefaultActions=[
+        #         {
+        #             'Type': 'fixed-response',
+        #             'FixedResponseConfig': {
+        #                 'StatusCode': '403',
+        #                 'ContentType': 'text/plain',
+        #                 'MessageBody': 'SORRY UNREACHABLE'
+        #             }
+        #         }
+        #     ]
+        # )
+
+        # # #####This aboce SDK works
+
+
+
+
+
+
+        #         # Create a Boto3 WAFV2 client
+        # wafv2_client = boto3.client('wafv2',region_name='us-east-1')
+
+        # # Provide the ARN of the CloudFront distribution
+        # response = wafv2_client.list_web_acls(Scope='CLOUDFRONT')
+
+        # # Extract the list of Web ACLs from the response
+        # web_acls = response['WebACLs']
+
+        # for web_acl in web_acls:
+        #     # web_acl_id = web_acl['Id']
+        #     web_acl_name = web_acl['Name']
+        #     if web_acl_name == Us_east_1_web_acl_name:
+        #         web_acl_arn = web_acl['ARN']
+        # # print(web_acl_arn)
+
+   
+        
+        # # Create the CloudFront distribution
+        # CDN = cloudfront.Distribution(
+        #     self,
+        #     "myDist",
+        #     web_acl_id=web_acl_arn,
+        #     default_behavior=cloudfront.BehaviorOptions(
+        #         origin=LoadBalancerV2Origin(
+        #             load_balancer=alb,
+        #             protocol_policy=cloudfront.OriginProtocolPolicy.HTTP_ONLY,
+        #             custom_headers={"New": "Zealand"}
+        #         ),
+        #     ),
+        # )

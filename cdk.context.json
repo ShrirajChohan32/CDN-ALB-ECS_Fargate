@@ -294,5 +294,358 @@
   "security-group:account=273541776559:region=ap-southeast-2:securityGroupId=sg-07f2bd4b606f63d1b": {
     "securityGroupId": "sg-07f2bd4b606f63d1b",
     "allowAllOutbound": false
+  },
+  "availability-zones:account=036762315531:region=ap-southeast-2": [
+    "ap-southeast-2a",
+    "ap-southeast-2b",
+    "ap-southeast-2c"
+  ],
+  "load-balancer:account=036762315531:loadBalancerArn=arn$:aws:elasticloadbalancing:ap-southeast-2:036762315531:loadbalancer/app/Cloudfront-origin/bc2ce9b4de2589fd:loadBalancerType=application:region=ap-southeast-2": {
+    "loadBalancerArn": "arn:aws:elasticloadbalancing:ap-southeast-2:036762315531:loadbalancer/app/Cloudfront-origin/bc2ce9b4de2589fd",
+    "loadBalancerCanonicalHostedZoneId": "Z1GM3OXH4ZPM65",
+    "loadBalancerDnsName": "Cloudfront-origin-1826190393.ap-southeast-2.elb.amazonaws.com",
+    "vpcId": "vpc-05e803408a20c8a61",
+    "securityGroupIds": [
+      "sg-06b688ff5bf20e0db"
+    ],
+    "ipAddressType": "ipv4"
+  },
+  "vpc-provider:account=036762315531:filter.vpc-id=vpc-05e803408a20c8a61:region=ap-southeast-2:returnAsymmetricSubnets=true": {
+    "vpcId": "vpc-05e803408a20c8a61",
+    "vpcCidrBlock": "10.4.0.0/16",
+    "ownerAccountId": "036762315531",
+    "availabilityZones": [],
+    "subnetGroups": [
+      {
+        "name": "Public",
+        "type": "Public",
+        "subnets": [
+          {
+            "subnetId": "subnet-0c50b8df731b18f73",
+            "cidr": "10.4.0.0/28",
+            "availabilityZone": "ap-southeast-2a",
+            "routeTableId": "rtb-0d7356414df392acc"
+          },
+          {
+            "subnetId": "subnet-03015e9e0540f548a",
+            "cidr": "10.4.0.16/28",
+            "availabilityZone": "ap-southeast-2b",
+            "routeTableId": "rtb-0c99dbd858de28f6e"
+          }
+        ]
+      },
+      {
+        "name": "Private",
+        "type": "Private",
+        "subnets": [
+          {
+            "subnetId": "subnet-05462a4fb711b4797",
+            "cidr": "10.4.0.32/28",
+            "availabilityZone": "ap-southeast-2a",
+            "routeTableId": "rtb-0ed9ec7b9401f2e1b"
+          },
+          {
+            "subnetId": "subnet-06e18ade4d267d951",
+            "cidr": "10.4.0.48/28",
+            "availabilityZone": "ap-southeast-2b",
+            "routeTableId": "rtb-0b90903af9ac5c1d9"
+          }
+        ]
+      }
+    ]
+  },
+  "security-group:account=036762315531:region=ap-southeast-2:securityGroupId=sg-06b688ff5bf20e0db": {
+    "securityGroupId": "sg-06b688ff5bf20e0db",
+    "allowAllOutbound": false
+  },
+  "load-balancer:account=036762315531:loadBalancerArn=arn$:aws:elasticloadbalancing:ap-southeast-2:036762315531:loadbalancer/app/Cloudfront-origin/ca40717a3cbb2f8f:loadBalancerType=application:region=ap-southeast-2": {
+    "loadBalancerArn": "arn:aws:elasticloadbalancing:ap-southeast-2:036762315531:loadbalancer/app/Cloudfront-origin/ca40717a3cbb2f8f",
+    "loadBalancerCanonicalHostedZoneId": "Z1GM3OXH4ZPM65",
+    "loadBalancerDnsName": "Cloudfront-origin-124423350.ap-southeast-2.elb.amazonaws.com",
+    "vpcId": "vpc-04b9dbde553eb4db0",
+    "securityGroupIds": [
+      "sg-092b7825c3ef8175e"
+    ],
+    "ipAddressType": "ipv4"
+  },
+  "vpc-provider:account=036762315531:filter.vpc-id=vpc-04b9dbde553eb4db0:region=ap-southeast-2:returnAsymmetricSubnets=true": {
+    "vpcId": "vpc-04b9dbde553eb4db0",
+    "vpcCidrBlock": "10.4.0.0/16",
+    "ownerAccountId": "036762315531",
+    "availabilityZones": [],
+    "subnetGroups": [
+      {
+        "name": "Private",
+        "type": "Private",
+        "subnets": [
+          {
+            "subnetId": "subnet-083e3d02437e6963e",
+            "cidr": "10.4.0.32/28",
+            "availabilityZone": "ap-southeast-2a",
+            "routeTableId": "rtb-0bb8f0ef1a8d66c61"
+          },
+          {
+            "subnetId": "subnet-0e9de4cd2c0fd16c4",
+            "cidr": "10.4.0.48/28",
+            "availabilityZone": "ap-southeast-2b",
+            "routeTableId": "rtb-0b645c896b6c552f7"
+          }
+        ]
+      },
+      {
+        "name": "Public",
+        "type": "Public",
+        "subnets": [
+          {
+            "subnetId": "subnet-039b23d54cb8c47a6",
+            "cidr": "10.4.0.0/28",
+            "availabilityZone": "ap-southeast-2a",
+            "routeTableId": "rtb-0fc1e2bba2d168783"
+          },
+          {
+            "subnetId": "subnet-0d1c3442257e1bda8",
+            "cidr": "10.4.0.16/28",
+            "availabilityZone": "ap-southeast-2b",
+            "routeTableId": "rtb-027a5eceee8036fd4"
+          }
+        ]
+      }
+    ]
+  },
+  "security-group:account=036762315531:region=ap-southeast-2:securityGroupId=sg-092b7825c3ef8175e": {
+    "securityGroupId": "sg-092b7825c3ef8175e",
+    "allowAllOutbound": false
+  },
+  "load-balancer:account=036762315531:loadBalancerArn=arn$:aws:elasticloadbalancing:ap-southeast-2:036762315531:loadbalancer/app/Cloudfront-origin/5f7cfe89c5506479:loadBalancerType=application:region=ap-southeast-2": {
+    "loadBalancerArn": "arn:aws:elasticloadbalancing:ap-southeast-2:036762315531:loadbalancer/app/Cloudfront-origin/5f7cfe89c5506479",
+    "loadBalancerCanonicalHostedZoneId": "Z1GM3OXH4ZPM65",
+    "loadBalancerDnsName": "Cloudfront-origin-1709295642.ap-southeast-2.elb.amazonaws.com",
+    "vpcId": "vpc-022d66b6c059bc829",
+    "securityGroupIds": [
+      "sg-0725d2365b1d5b0c3"
+    ],
+    "ipAddressType": "ipv4"
+  },
+  "vpc-provider:account=036762315531:filter.vpc-id=vpc-022d66b6c059bc829:region=ap-southeast-2:returnAsymmetricSubnets=true": {
+    "vpcId": "vpc-022d66b6c059bc829",
+    "vpcCidrBlock": "10.4.0.0/16",
+    "ownerAccountId": "036762315531",
+    "availabilityZones": [],
+    "subnetGroups": [
+      {
+        "name": "Private",
+        "type": "Private",
+        "subnets": [
+          {
+            "subnetId": "subnet-00ffe2789aa97ab67",
+            "cidr": "10.4.0.32/28",
+            "availabilityZone": "ap-southeast-2a",
+            "routeTableId": "rtb-0fc5ec609dc8dd17f"
+          },
+          {
+            "subnetId": "subnet-0e677fff386d61836",
+            "cidr": "10.4.0.48/28",
+            "availabilityZone": "ap-southeast-2b",
+            "routeTableId": "rtb-0faf27513f1ff25e7"
+          }
+        ]
+      },
+      {
+        "name": "Public",
+        "type": "Public",
+        "subnets": [
+          {
+            "subnetId": "subnet-0a08cf0445ac326d0",
+            "cidr": "10.4.0.0/28",
+            "availabilityZone": "ap-southeast-2a",
+            "routeTableId": "rtb-0c554b0c7793cfbe7"
+          },
+          {
+            "subnetId": "subnet-0dd1cdac1bb026f12",
+            "cidr": "10.4.0.16/28",
+            "availabilityZone": "ap-southeast-2b",
+            "routeTableId": "rtb-0db50c74371a0fb1a"
+          }
+        ]
+      }
+    ]
+  },
+  "security-group:account=036762315531:region=ap-southeast-2:securityGroupId=sg-0725d2365b1d5b0c3": {
+    "securityGroupId": "sg-0725d2365b1d5b0c3",
+    "allowAllOutbound": false
+  },
+  "load-balancer:account=036762315531:loadBalancerArn=arn$:aws:elasticloadbalancing:ap-southeast-2:036762315531:loadbalancer/app/Cloudfront-origin/dc854354d9c4c51e:loadBalancerType=application:region=ap-southeast-2": {
+    "loadBalancerArn": "arn:aws:elasticloadbalancing:ap-southeast-2:036762315531:loadbalancer/app/Cloudfront-origin/dc854354d9c4c51e",
+    "loadBalancerCanonicalHostedZoneId": "Z1GM3OXH4ZPM65",
+    "loadBalancerDnsName": "Cloudfront-origin-1949678336.ap-southeast-2.elb.amazonaws.com",
+    "vpcId": "vpc-09a8f606e898ae3f0",
+    "securityGroupIds": [
+      "sg-0d151093d4880f437"
+    ],
+    "ipAddressType": "ipv4"
+  },
+  "vpc-provider:account=036762315531:filter.vpc-id=vpc-09a8f606e898ae3f0:region=ap-southeast-2:returnAsymmetricSubnets=true": {
+    "vpcId": "vpc-09a8f606e898ae3f0",
+    "vpcCidrBlock": "10.4.0.0/16",
+    "ownerAccountId": "036762315531",
+    "availabilityZones": [],
+    "subnetGroups": [
+      {
+        "name": "Private",
+        "type": "Private",
+        "subnets": [
+          {
+            "subnetId": "subnet-02c4f10528370c107",
+            "cidr": "10.4.0.32/28",
+            "availabilityZone": "ap-southeast-2a",
+            "routeTableId": "rtb-00ac4f2a2cc9811ee"
+          },
+          {
+            "subnetId": "subnet-0a19f68137d11f95e",
+            "cidr": "10.4.0.48/28",
+            "availabilityZone": "ap-southeast-2b",
+            "routeTableId": "rtb-00778e4aa63470ced"
+          }
+        ]
+      },
+      {
+        "name": "Public",
+        "type": "Public",
+        "subnets": [
+          {
+            "subnetId": "subnet-0e03bcbfaa2578175",
+            "cidr": "10.4.0.0/28",
+            "availabilityZone": "ap-southeast-2a",
+            "routeTableId": "rtb-0c739370619c28cb3"
+          },
+          {
+            "subnetId": "subnet-0dce0e1eea7578712",
+            "cidr": "10.4.0.16/28",
+            "availabilityZone": "ap-southeast-2b",
+            "routeTableId": "rtb-0bf4839604910c686"
+          }
+        ]
+      }
+    ]
+  },
+  "security-group:account=036762315531:region=ap-southeast-2:securityGroupId=sg-0d151093d4880f437": {
+    "securityGroupId": "sg-0d151093d4880f437",
+    "allowAllOutbound": false
+  },
+  "load-balancer:account=036762315531:loadBalancerArn=arn$:aws:elasticloadbalancing:ap-southeast-2:036762315531:loadbalancer/app/Cloudfront-origin/5b289ccd7c0ab6db:loadBalancerType=application:region=ap-southeast-2": {
+    "loadBalancerArn": "arn:aws:elasticloadbalancing:ap-southeast-2:036762315531:loadbalancer/app/Cloudfront-origin/5b289ccd7c0ab6db",
+    "loadBalancerCanonicalHostedZoneId": "Z1GM3OXH4ZPM65",
+    "loadBalancerDnsName": "Cloudfront-origin-1724759935.ap-southeast-2.elb.amazonaws.com",
+    "vpcId": "vpc-0d090b7feb7360107",
+    "securityGroupIds": [
+      "sg-0ea1c2143daa5446e"
+    ],
+    "ipAddressType": "ipv4"
+  },
+  "vpc-provider:account=036762315531:filter.vpc-id=vpc-0d090b7feb7360107:region=ap-southeast-2:returnAsymmetricSubnets=true": {
+    "vpcId": "vpc-0d090b7feb7360107",
+    "vpcCidrBlock": "10.4.0.0/16",
+    "ownerAccountId": "036762315531",
+    "availabilityZones": [],
+    "subnetGroups": [
+      {
+        "name": "Private",
+        "type": "Private",
+        "subnets": [
+          {
+            "subnetId": "subnet-0d43e13b0a885c932",
+            "cidr": "10.4.0.32/28",
+            "availabilityZone": "ap-southeast-2a",
+            "routeTableId": "rtb-0f57a231e50790fae"
+          },
+          {
+            "subnetId": "subnet-04b4578ad5c824649",
+            "cidr": "10.4.0.48/28",
+            "availabilityZone": "ap-southeast-2b",
+            "routeTableId": "rtb-055145a381823b487"
+          }
+        ]
+      },
+      {
+        "name": "Public",
+        "type": "Public",
+        "subnets": [
+          {
+            "subnetId": "subnet-0fa9b1bd4aee65df6",
+            "cidr": "10.4.0.0/28",
+            "availabilityZone": "ap-southeast-2a",
+            "routeTableId": "rtb-05d0e73717f75757d"
+          },
+          {
+            "subnetId": "subnet-08e6f84ccc5fd42e1",
+            "cidr": "10.4.0.16/28",
+            "availabilityZone": "ap-southeast-2b",
+            "routeTableId": "rtb-0cf05600a9fe28e7b"
+          }
+        ]
+      }
+    ]
+  },
+  "security-group:account=036762315531:region=ap-southeast-2:securityGroupId=sg-0ea1c2143daa5446e": {
+    "securityGroupId": "sg-0ea1c2143daa5446e",
+    "allowAllOutbound": false
+  },
+  "load-balancer:account=036762315531:loadBalancerArn=arn$:aws:elasticloadbalancing:ap-southeast-2:036762315531:loadbalancer/app/Cloudfront-origin/faa79e1274cddc47:loadBalancerType=application:region=ap-southeast-2": {
+    "loadBalancerArn": "arn:aws:elasticloadbalancing:ap-southeast-2:036762315531:loadbalancer/app/Cloudfront-origin/faa79e1274cddc47",
+    "loadBalancerCanonicalHostedZoneId": "Z1GM3OXH4ZPM65",
+    "loadBalancerDnsName": "Cloudfront-origin-507129535.ap-southeast-2.elb.amazonaws.com",
+    "vpcId": "vpc-0afc568156033cc60",
+    "securityGroupIds": [
+      "sg-05201eeae32f04cf0"
+    ],
+    "ipAddressType": "ipv4"
+  },
+  "vpc-provider:account=036762315531:filter.vpc-id=vpc-0afc568156033cc60:region=ap-southeast-2:returnAsymmetricSubnets=true": {
+    "vpcId": "vpc-0afc568156033cc60",
+    "vpcCidrBlock": "10.4.0.0/16",
+    "ownerAccountId": "036762315531",
+    "availabilityZones": [],
+    "subnetGroups": [
+      {
+        "name": "Public",
+        "type": "Public",
+        "subnets": [
+          {
+            "subnetId": "subnet-09524d76a87e72048",
+            "cidr": "10.4.0.0/28",
+            "availabilityZone": "ap-southeast-2a",
+            "routeTableId": "rtb-058350f1e2172e86e"
+          },
+          {
+            "subnetId": "subnet-06a957eb27bd5df71",
+            "cidr": "10.4.0.16/28",
+            "availabilityZone": "ap-southeast-2b",
+            "routeTableId": "rtb-03a7d921b60c4719b"
+          }
+        ]
+      },
+      {
+        "name": "Private",
+        "type": "Private",
+        "subnets": [
+          {
+            "subnetId": "subnet-084bddb23a28abf02",
+            "cidr": "10.4.0.32/28",
+            "availabilityZone": "ap-southeast-2a",
+            "routeTableId": "rtb-0508bcef4749fd759"
+          },
+          {
+            "subnetId": "subnet-01c42fecb32a82d2d",
+            "cidr": "10.4.0.48/28",
+            "availabilityZone": "ap-southeast-2b",
+            "routeTableId": "rtb-03abda83776e18a99"
+          }
+        ]
+      }
+    ]
+  },
+  "security-group:account=036762315531:region=ap-southeast-2:securityGroupId=sg-05201eeae32f04cf0": {
+    "securityGroupId": "sg-05201eeae32f04cf0",
+    "allowAllOutbound": false
   }
 }
